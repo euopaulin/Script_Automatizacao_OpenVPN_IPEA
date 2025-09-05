@@ -42,7 +42,7 @@ instalar_openvpn()
 instalar_remmnina()
 
 try:
-    print('Script concluído com sucesso.')
+    print('Script concluído com sucesso. Seu ambiente já está pronto para uso!')
     sys.exit(0)
 except Exception as e:
     print(f'Ocorreu um erro inesperado: {e}')
