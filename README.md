@@ -1,44 +1,73 @@
-# Script de Instalação para Conexão Remota
+## 🧰 Script de Instalação para Conexão Remota usando OpenVPN
 
-Este script automatiza a instalação das ferramentas necessárias para estabelecer conexões remotas seguras em sistemas baseados em Debian/Ubuntu. Ele configura seu ambiente Linux para acesso a redes e servidores via **OpenVPN** e **RDP (Remote Desktop Protocol)**, utilizando o NetworkManager e o Remmina.
+Este script automatiza a instalação e configuração das principais ferramentas necessárias para estabelecer conexões remotas seguras em sistemas Linux baseados em Debian ou Ubuntu.
+Ele prepara o ambiente para acesso a redes e servidores via OpenVPN e RDP (Remote Desktop Protocol), utilizando o NetworkManager e o Remmina.
 
----
+## Funcionalidades
 
-### Funcionalidades
+**Atualização de Pacotes:**
+Garante que a lista de pacotes e dependências do sistema estejam atualizados antes da instalação, assegurando versões recentes e estáveis.
 
-* **Atualização de Pacotes:** Garante que a lista de pacotes do sistema esteja atualizada, permitindo a instalação das versões mais recentes das ferramentas.
-* **Instalação do OpenVPN:** Instala o plugin do OpenVPN para o NetworkManager, facilitando a configuração e o gerenciamento de conexões VPN pela interface gráfica.
-* **Instalação do Remmina:** Instala o **Remmina**, um cliente de desktop remoto versátil que suporta vários protocolos, incluindo RDP, VNC, SSH e SFTP.
-* **Reinício do NetworkManager:** Reinicia o serviço do NetworkManager para que ele reconheça imediatamente o novo plugin do OpenVPN.
+**Instalação do OpenVPN:**
+Instala o plugin NetworkManager-OpenVPN, permitindo configurar e gerenciar conexões VPN diretamente pela interface gráfica do sistema.
 
----
+**Instalação do Remmina:**
+Instala o Remmina, um cliente de desktop remoto completo que suporta múltiplos protocolos, como RDP, VNC, SSH e SFTP.
 
-### Requisitos
+**Reinicialização do NetworkManager:**
+Reinicia automaticamente o serviço para que o novo plugin OpenVPN seja reconhecido e carregado corretamente.
 
-* O script foi projetado para distribuições Linux baseadas em **Debian** ou **Ubuntu**.
-* É necessário ter privilégios de **superusuário (root)** para executar as instalações.
+## Requisitos
 
----
+Distribuição Linux baseada em Debian ou Ubuntu.
 
-### Como Usar
+Permissões de superusuário (root) para executar instalações e reiniciar serviços.
 
-1.  **Salve o Script:**
-    Salve o código em um arquivo com a extensão `.py`, por exemplo, `instalar_ferramentas_remotas.py`.
+Conexão com a internet ativa durante a execução do script.
 
-2.  **Abra o Terminal:**
-    Navegue até o diretório onde você salvou o arquivo.
+## Como Utilizar
 
-3.  **Execute o Script como Root:**
-    Execute o script com o comando `sudo`:
+**Salve o Script:**
+Copie o conteúdo e salve-o em um arquivo com a extensão .py, por exemplo:
 
-    ```bash
-    sudo python3 instalar_ferramentas_remotas.py
-    ```
+instalar_ferramentas_remotas.py
 
-    O script fará todo o trabalho, exibindo o progresso e as mensagens de sucesso ou erro diretamente no terminal.
+**Abra o Terminal:**
+Navegue até o diretório onde o arquivo foi salvo:
+```bash
+cd /caminho/para/o/arquivo
+```
 
----
+**Execute o Script como Root:**
+Execute o comando abaixo para iniciar a instalação:
+```bash
+sudo python3 instalar_ferramentas_remotas.py
+```
 
-### Observações Adicionais
+O script exibirá no terminal o progresso de cada etapa, além de mensagens de sucesso ou erro conforme a execução.
 
-Após a execução do script, você precisará importar o arquivo de configuração (`.ovpn`) da sua rede no NetworkManager e configurar a nova conexão no Remmina para se conectar ao seu servidor remoto.
+## Pós-instalação
+
+Após a execução bem-sucedida:
+
+**Configuração da VPN:**
+Importe o arquivo de configuração (.ovpn) da sua rede diretamente no NetworkManager.
+
+**Conexão Remota via Remmina:**
+Abra o Remmina e crie uma nova conexão usando o protocolo RDP, VNC, SSH ou outro conforme sua necessidade.
+
+### Dicas
+
+Caso o NetworkManager não reconheça imediatamente o plugin OpenVPN, reinicie o sistema.
+
+É recomendável testar a conexão VPN antes de configurar o acesso remoto via Remmina.
+
+Para verificar se os pacotes foram instalados corretamente, utilize:
+
+dpkg -l | grep openvpn
+dpkg -l | grep remmina
+
+**📜 Licença**
+
+Este script é disponibilizado livremente para uso e modificação.
+Use por sua conta e risco, sempre com as devidas permissões administrativas.
