@@ -2,16 +2,29 @@
 
 #Script para configuração do ambiente Linux para VPN
 
-sudoupdate () {
-    att="sudo apt update && sudo apt upgrade -y"
+attdosistema () {
+    echo "Iniciando a atualização do sistema..."
+    att="sudo apt update"
+    att2="sudo apt upgrade -y"
     $att
-    if [ "$att" -eq 1 ]; then #então
-        echo "Erro ao atualizar o sistema. Tente novamente."
-        erro= $?
+    $att2
+    if [ "$att" -eq 0 ] and [ "$att2" -eq 0 ]; then #então
+        echo "Sistema atualizado com sucesso."
+    elif [ "$att" -ne 0 ]; then
+        echo "Não foi possível atualizar a lista de pacotes. Tente novamente."
+        erro=$?
         echo "Código de erro: $erro"
         return 1
-    else
-        echo "Atualização concluída com sucesso."
+    elif [ "$att2" -ne 0 ]; then
+        echo "Não foi possível atualizar os pacotes do sistema. Tente novamente."
+        erro=$?
+        echo "Código de erro: $erro"
+        return 1
+    else   
+        echo "Não foi possível atualizar o sistema. Tente novamente."
+        erro=$?
+        echo "Código de erro: $erro"
+        return 1
     fi #Em bash o "fi" fecha o "if"
 }
 
@@ -19,7 +32,7 @@ instalar_openvpn () {
     echo "Iniciando a instalação do OpenVPN e Network Manager OpenVPN..."
     vpn="sudo apt install network-manager-openvpn -y"
     $vpn
-    net="Killall -HUP NetworkManager"
+    net="killall -HUP NetworkManager"
     $net
     if [ $vpn -eq 0 ] and [ $net -eq 0 ]; then
         echo "OpenVPN e Network Manager instalados com sucesso."
@@ -57,7 +70,7 @@ instalar_remmina() {
 
 
 echo "Script Iniciado."
-sudoupdate
+attdosistema
 instalar_openvpn
 instalar_remmina
 echo "Script Finalizado."
